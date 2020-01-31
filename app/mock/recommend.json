@@ -1,0 +1,73 @@
+{
+  "errCode": 0,
+  "errMsg": "",
+  "data": {
+    "banner": [
+      {
+        "name": "我和我的祖国(钢琴曲伴奏)",
+        "author": "解宁",
+        "img": "http://img1.kuwo.cn/star/starheads/300/64/18/4137672274.jpg",
+        "url": "http://m10.music.126.net/20200131213914/5561ad6f9b1fd08fc90a5058c3c58966/yyaac/5159/0009/5409/f36192ca547c2800c50fccb147665b62.m4a",
+        "duration": "02:27"
+      },
+      {
+        "name": "今天是你的生日",
+        "author": "群星",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/64/92/1232598615.jpg",
+        "url": "http://m10.music.126.net/20200131214819/7bfb04aca91376f12706b41e5dc3df4d/yyaac/045c/0159/5609/36d7487d4963b548548bac1fa8681bfc.m4a",
+        "duration": "03:52"
+      },
+      {
+        "name": "My Love",
+        "author": "Westlife",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/66/73/204789252.jpg",
+        "url": "http://m10.music.126.net/20200131215343/8265bcd22b730ee85dc0aef70c266104/yyaac/5558/565e/5458/b23da9e134a427be56d1c2da913e815b.m4a",
+        "duration": "03:53"
+      }
+    ],
+    "recommend": [
+      {
+        "name": "山楂树の恋",
+        "author": "齐欣雨",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/65/97/3363376613.jpg",
+        "url": "http://m10.music.126.net/20200131215650/bbb91de483926cf4adf3e0d260b50c41/yyaac/5508/0f5b/065b/bbea5346708137e41a0011b8c545751b.m4a",
+        "duration": "00:48"
+      },
+      {
+        "name": "根本你不懂得爱我",
+        "author": "梁爽凉爽",
+        "img": "http://img4.kuwo.cn/star/albumcover/300/69/44/710235205.jpg",
+        "url": "http://m10.music.126.net/20200131215947/747342eb7066381cd5d09edc52a286a2/yyaac/015f/0358/0753/654818841542bbfb7e8209ad533d0b83.m4a",
+        "duration": "04:02"
+      },
+      {
+        "name": "心似烟火",
+        "author": "陈壹千",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/88/66/266391963.jpg",
+        "url": "http://m10.music.126.net/20200131220240/c0c7ecfc3b7942387712de664d8139fc/yyaac/515f/515e/0153/f5b27e7a44f45ccc688a69fc281cfdde.m4a",
+        "duration": "04:31"
+      },
+      {
+        "name": "芒种",
+        "author": "音阙诗听 / 赵方婧",
+        "img": "http://img2.kuwo.cn/star/albumcover/300/59/39/950986041.jpg",
+        "url": "http://m10.music.126.net/20200131220405/05feb2dbeef0d2c519db4c07d9ad1f58/yyaac/515f/515e/0153/f5b27e7a44f45ccc688a69fc281cfdde.m4a",
+        "duration": "03:36"
+      },
+      {
+        "name": "你笑起来真好看",
+        "author": "李昕融 / 樊桐舟 / 李凯稠",
+        "img": "http://img4.kuwo.cn/star/albumcover/300/37/92/1895437893.jpg",
+        "url": "http://m10.music.126.net/20200131220613/cb772ee8192eb0012ca3f5b75b81cb75/yyaac/0453/0253/5408/396c27493559400e89e9cb97ba01d570.m4a",
+        "duration": "02:52"
+      },
+      {
+        "name": "红豆(Live)",
+        "author": "林允儿",
+        "img": "http://star.kuwo.cn/star/starheads/300/29/82/3362138331.jpg",
+        "url": "http://m10.music.126.net/20200131220817/aa70aa46cc9f2692688a8a21a67658f5/yyaac/015b/510b/045f/611296cf35fad535966e35f11eb87840.m4a",
+        "duration": "04:42"
+      }
+    ]
+  }
+}
