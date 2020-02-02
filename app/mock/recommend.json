@@ -68,6 +68,22 @@
         "url": "http://m10.music.126.net/20200131220817/aa70aa46cc9f2692688a8a21a67658f5/yyaac/015b/510b/045f/611296cf35fad535966e35f11eb87840.m4a",
         "duration": "04:42"
       }
+    ],
+    "guess": [
+      {
+        "name": "山楂树の恋",
+        "author": "齐欣雨",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/65/97/3363376613.jpg",
+        "url": "http://m10.music.126.net/20200131215650/bbb91de483926cf4adf3e0d260b50c41/yyaac/5508/0f5b/065b/bbea5346708137e41a0011b8c545751b.m4a",
+        "duration": "00:48"
+      },
+      {
+        "name": "红豆(Live)",
+        "author": "林允儿",
+        "img": "http://star.kuwo.cn/star/starheads/300/29/82/3362138331.jpg",
+        "url": "http://m10.music.126.net/20200131220817/aa70aa46cc9f2692688a8a21a67658f5/yyaac/015b/510b/045f/611296cf35fad535966e35f11eb87840.m4a",
+        "duration": "04:42"
+      }
     ]
   }
 }
