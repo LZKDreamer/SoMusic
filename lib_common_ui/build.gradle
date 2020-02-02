@@ -27,4 +27,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.recyclerview
+    compileOnly rootProject.depsLibs.butterknife
 }

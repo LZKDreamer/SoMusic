@@ -26,11 +26,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.depsLibs.appcompat
+    implementation rootProject.depsLibs.recyclerview
     implementation rootProject.depsLibs.constraintlayout
     implementation rootProject.depsLibs.butterknife
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor rootProject.depsLibs.butterknife_compiler
     implementation rootProject.depsLibs.MagicIndicator
+    implementation rootProject.depsLibs.banner
+    implementation rootProject.depsLibs.retrofit
+    implementation rootProject.depsLibs.converter_gson
+    implementation rootProject.depsLibs.brvah
+
 
     implementation project(':lib_common_ui')
     implementation project(':lib_image_loader')

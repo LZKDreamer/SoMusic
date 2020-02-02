@@ -19,7 +19,7 @@ public class ImageLoadManager {
 
     private ImageLoadManager(){}
 
-    private static ImageLoadManager getInstance(){
+    public static ImageLoadManager getInstance(){
         if (sImageLoadManager == null){
             sImageLoadManager = new ImageLoadManager();
         }
@@ -37,9 +37,10 @@ public class ImageLoadManager {
         RequestOptions options = RequestOptions.bitmapTransform(roundedCorners);
         Glide.with(imageView.getContext())
                 .load(url)
-                .thumbnail(0.3f)
+                .thumbnail(0.6f)
                 .placeholder(R.drawable.bg_img_shape)
                 .transition(withCrossFade())
+                .centerCrop()
                 .apply(options)
                 .into(imageView);
     }

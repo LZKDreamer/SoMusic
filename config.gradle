@@ -16,16 +16,25 @@ ext{
             butterknife         : '10.2.1',
             glide               : '4.11.0',
             MagicIndicator      : '1.5.0',
+            banner              : '2.0.0-alpha',
+            retrofit            : '2.7.1',
+            converter_gson      : '2.7.1',
+            brvah               : '2.9.30',
 
     ]
 
     depsLibs = [
             appcompat               : "androidx.appcompat:appcompat:${depsVersion.appcompat}" ,
+            recyclerview            : 'androidx.recyclerview:recyclerview:1.0.0',
             constraintlayout        : "androidx.constraintlayout:constraintlayout:${depsVersion.constraintlayout}",
             butterknife             : "com.jakewharton:butterknife:${depsVersion.butterknife}",
             butterknife_compiler    : "com.jakewharton:butterknife-compiler:${depsVersion.butterknife}",
             glide                   : "com.github.bumptech.glide:glide:${depsVersion.glide}",
             glide_compiler          : "com.github.bumptech.glide:compiler:${depsVersion.glide}",
             MagicIndicator          : "com.github.hackware1993:MagicIndicator:${depsVersion.MagicIndicator}",
+            banner                  : "com.youth.banner:banner:${depsVersion.banner}",
+            retrofit                : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit}",
+            converter_gson          : "com.squareup.retrofit2:converter-gson:${depsVersion.converter_gson}",
+            brvah                   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.brvah}",
     ]
 }

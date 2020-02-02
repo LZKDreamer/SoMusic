@@ -4,6 +4,20 @@
   "data": {
     "banner": [
       {
+        "name": "下山",
+        "author": "要不要买菜",
+        "img": "http://img1.kuwo.cn/star/albumcover/300/97/94/1817887210.jpg",
+        "url": "http://m10.music.126.net/20200202093410/f2b1f464ae769e4e8137c14c0ce13481/yyaac/015a/055d/525a/60ea8f22932761f95da8e0df17c5d319.m4a",
+        "duration": "02:53"
+      },
+      {
+        "name": "炸山姑娘",
+        "author": "七音盒",
+        "img": "http://img2.kuwo.cn/star/albumcover/300/56/65/1176100766.jpg",
+        "url": "http://m10.music.126.net/20200202093827/67387aafbc72caf068c51f61857d7cc4/yyaac/525c/075f/015b/e6beaec28f05579b3b3961f3b85ca909.m4a",
+        "duration": "02:41"
+      },
+      {
         "name": "我和我的祖国(钢琴曲伴奏)",
         "author": "解宁",
         "img": "http://img1.kuwo.cn/star/starheads/300/64/18/4137672274.jpg",
@@ -20,7 +34,7 @@
       {
         "name": "My Love",
         "author": "Westlife",
-        "img": "http://img1.kuwo.cn/star/albumcover/300/66/73/204789252.jpg",
+        "img": "http://img4.kuwo.cn/star/albumcover/300/9/52/2714122363.jpg",
         "url": "http://m10.music.126.net/20200131215343/8265bcd22b730ee85dc0aef70c266104/yyaac/5558/565e/5458/b23da9e134a427be56d1c2da913e815b.m4a",
         "duration": "03:53"
       }

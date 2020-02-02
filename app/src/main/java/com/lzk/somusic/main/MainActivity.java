@@ -110,6 +110,7 @@ public class MainActivity extends BaseUIActivity {
         });
         mMainIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mMainIndicator,mMainVp);
+        mMainVp.setCurrentItem(1);
     }
 
     private void initViewPager(){
