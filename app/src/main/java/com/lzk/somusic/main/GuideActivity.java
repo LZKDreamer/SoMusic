@@ -3,18 +3,30 @@ package com.lzk.somusic.main;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.NavUtils;
 import androidx.viewpager.widget.ViewPager;
 
+import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
+import com.lzk.lib_audio.audioplayer.core.AudioController;
+import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
+import com.lzk.lib_audio.audioplayer.event.AudioStartEvent;
+import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
+import com.lzk.lib_audio.audioplayer.model.AudioBean;
 import com.lzk.lib_common_ui.base.activity.BaseUIActivity;
 import com.lzk.lib_common_ui.utils.SPUtil;
 import com.lzk.somusic.R;
 import com.lzk.somusic.app.Constants;
 import com.lzk.somusic.util.AnimationUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +65,16 @@ public class GuideActivity extends BaseUIActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
+        EventBusHelper.getInstance().register(this);
         initViewPager();
-        initAnimation();
+        loadMusic();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioPlayerManager.stopAudio();
+        EventBusHelper.getInstance().unregister(this);
     }
 
     @OnClick({R.id.guide_music_iv, R.id.guide_skip_tv,R.id.guide_enter_iv})
@@ -62,9 +82,15 @@ public class GuideActivity extends BaseUIActivity {
         switch (view.getId()) {
             case R.id.guide_music_iv:
                 if (isRotation) {
-                    mAnimator.pause();
+                    if (mAnimator != null){
+                        mAnimator.pause();
+                    }
+                    AudioPlayerManager.pauseAudio();
                 } else {
-                    mAnimator.start();
+                    if (mAnimator != null){
+                        mAnimator.start();
+                    }
+                    AudioPlayerManager.resumeAudio();
                 }
                 isRotation = !isRotation;
                 break;
@@ -141,9 +167,18 @@ public class GuideActivity extends BaseUIActivity {
     }
 
     private void initAnimation() {
-        mAnimator = AnimationUtil.rotation(guideMusicIv);
-        mAnimator.start();
-        isRotation = true;
+        if (!isRotation){
+            mAnimator = AnimationUtil.rotation(guideMusicIv);
+            mAnimator.start();
+            isRotation = true;
+        }
+    }
+
+    private void loadMusic(){
+        AudioBean audioBean = new AudioBean();
+        audioBean.setUrl("https://win-web-rf01-sycdn.kuwo.cn/1b8db0856365a04ced3e201d4166b4c8/5e380d22/resource/n2/63/91/1154918421.mp3");
+        AudioPlayerManager.addAudio(audioBean);
+        AudioPlayerManager.setPlayMode(AudioController.PlayMode.REPEAT);
     }
 
     private void startMainActivity(){
@@ -151,5 +186,10 @@ public class GuideActivity extends BaseUIActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStartEvent(AudioStartEvent startEvent){
+        initAnimation();
     }
 }

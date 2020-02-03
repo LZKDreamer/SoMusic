@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">lib_audio</string>
+    <string name="audio_focus_occupied">请关闭其它音频播放器</string>
+
+    <!--错误信息-->
+    <string name="not_found_music">播放队列为空或索引越界</string>
 </resources>

@@ -2,6 +2,7 @@ package com.lzk.somusic.app;
 
 import android.app.Application;
 
+import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
 import com.lzk.lib_common_ui.utils.SPUtil;
 
 /**
@@ -15,5 +16,7 @@ public class MyApplication extends Application {
         super.onCreate();
         //初始化SPUtil
         SPUtil.getInstance().init(this,Constants.SP_NAME);
+        //初始化音频播放器
+        AudioPlayerManager.init(this);
     }
 }

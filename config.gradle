@@ -20,7 +20,8 @@ ext{
             retrofit            : '2.7.1',
             converter_gson      : '2.7.1',
             brvah               : '2.9.30',
-
+            green_dao           : '3.2.2',
+            eventbus            : '3.1.1',
     ]
 
     depsLibs = [
@@ -36,5 +37,7 @@ ext{
             retrofit                : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit}",
             converter_gson          : "com.squareup.retrofit2:converter-gson:${depsVersion.converter_gson}",
             brvah                   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.brvah}",
+            green_dao               : "org.greenrobot:greendao:${depsVersion.green_dao}",
+            eventbus                : "org.greenrobot:eventbus:${depsVersion.eventbus}",
     ]
 }
