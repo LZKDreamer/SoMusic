@@ -1,11 +1,13 @@
 package com.lzk.lib_audio.audioplayer.model;
 
+import java.io.Serializable;
+
 /**
  * Author: LiaoZhongKai.
  * Date: 2020/2/2
  * Function:音乐相关实体类
  */
-public class AudioBean {
+public class AudioBean implements Serializable {
 
     /**
      * 歌曲名

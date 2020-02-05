@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.GuideActivity"/>
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".main.MainActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".main.WelcomeActivity"
             >

@@ -1,9 +1,5 @@
 package com.lzk.lib_audio.audioplayer.core;
 
-import android.util.Log;
-
-import com.lzk.lib_audio.R;
-import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
 import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
 import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
@@ -122,6 +118,14 @@ public class AudioController {
         return getStatus() == CustomMediaPlayer.Status.PAUSED;
     }
 
+    /**
+     * 是否处于空闲状态
+     * @return
+     */
+    public boolean isIdle(){
+        return getStatus() == CustomMediaPlayer.Status.IDLE;
+    }
+
     //获取播放状态
     private CustomMediaPlayer.Status getStatus(){
         return mAudioPlayer.getStatus();
@@ -165,14 +169,15 @@ public class AudioController {
         EventBusHelper.getInstance().unregister(this);
     }
 
-    //获取mCurIndex对应的歌曲对象
-    private AudioBean getAudio(){
+    /**
+     * 获取当前的歌曲对象
+     * @return
+     */
+    public AudioBean getAudio(){
         if (mQueue != null && mQueue.size() > 0 && mCurIndex < mQueue.size()){
             return mQueue.get(mCurIndex);
-        }else {
-            throw new NullPointerException(AudioPlayerManager.getContext()
-                    .getResources().getString(R.string.not_found_music));
         }
+        return null;
     }
 
     /**
@@ -204,7 +209,7 @@ public class AudioController {
                 mCurIndex = (mCurIndex+1) % mQueue.size();
                 return getAudio();
             case RANDOM:
-                mCurIndex = ((new Random().nextInt(mQueue.size()))+1) % mQueue.size();
+                mCurIndex = new Random().nextInt(mQueue.size()) % mQueue.size();
                 return getAudio();
             case REPEAT:
                 return getAudio();
@@ -216,15 +221,17 @@ public class AudioController {
      * 获取上一首歌曲对象
      */
     private AudioBean getPreviousAudio(){
-        switch (mPlayMode){
-            case LOOP:
-                mCurIndex = mCurIndex+(mQueue.size()-1) % mQueue.size();
-                return getAudio();
-            case RANDOM:
-                mCurIndex = ((new Random().nextInt(mQueue.size()))+1) % mQueue.size();
-                return getAudio();
-            case REPEAT:
-                return getAudio();
+        if (mQueue.size() > 0){
+            switch (mPlayMode){
+                case LOOP:
+                    mCurIndex = (mCurIndex+mQueue.size()-1) % mQueue.size();
+                    return getAudio();
+                case RANDOM:
+                    mCurIndex = new Random().nextInt(mQueue.size()) % mQueue.size();
+                    return getAudio();
+                case REPEAT:
+                    return getAudio();
+            }
         }
         return null;
     }
@@ -237,6 +244,8 @@ public class AudioController {
             pause();
         }else if (isPause()){
             resume();
+        }else if (isIdle()){
+            play(mCurIndex);
         }
     }
 
@@ -265,7 +274,6 @@ public class AudioController {
     //插放完毕事件处理
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioCompleteEvent(AudioEventCompletionEvent event) {
-        Log.d("shiZi","onAudioCompleteEvent");
         next();
     }
 

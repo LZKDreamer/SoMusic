@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -70,6 +71,7 @@ public class AudioFocusManager implements AudioManager.OnAudioFocusChangeListene
 
     @Override
     public void onAudioFocusChange(int i) {
+        Log.d("shiZi","i:"+i);
         switch (i){
             case AudioManager.AUDIOFOCUS_GAIN:
                 if (mAudioFocusListener != null) mAudioFocusListener.onGain();

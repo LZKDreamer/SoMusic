@@ -29,7 +29,7 @@ dependencies {
     compileOnly rootProject.depsLibs.appcompat
     compileOnly rootProject.depsLibs.eventbus
     compileOnly rootProject.depsLibs.green_dao
-    compileOnly rootProject.depsLibs.eventbus
 
     compileOnly project(':lib_common_ui')
+    compileOnly project(':lib_image_loader')
 }

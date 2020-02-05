@@ -58,7 +58,6 @@ public class GuideActivity extends BaseUIActivity {
     private List<View> mViewList;
     private GuidePagerAdapter mPagerAdapter;
     private ObjectAnimator mAnimator;
-    private boolean isRotation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,18 +80,17 @@ public class GuideActivity extends BaseUIActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.guide_music_iv:
-                if (isRotation) {
+                if (AudioPlayerManager.isPlaying()){
                     if (mAnimator != null){
                         mAnimator.pause();
                     }
                     AudioPlayerManager.pauseAudio();
-                } else {
+                }else {
                     if (mAnimator != null){
                         mAnimator.start();
                     }
                     AudioPlayerManager.resumeAudio();
                 }
-                isRotation = !isRotation;
                 break;
             case R.id.guide_skip_tv:
             case R.id.guide_enter_iv:
@@ -167,16 +165,15 @@ public class GuideActivity extends BaseUIActivity {
     }
 
     private void initAnimation() {
-        if (!isRotation){
+        if (mAnimator == null){
             mAnimator = AnimationUtil.rotation(guideMusicIv);
             mAnimator.start();
-            isRotation = true;
         }
     }
 
     private void loadMusic(){
         AudioBean audioBean = new AudioBean();
-        audioBean.setUrl("https://win-web-rf01-sycdn.kuwo.cn/1b8db0856365a04ced3e201d4166b4c8/5e380d22/resource/n2/63/91/1154918421.mp3");
+        audioBean.setUrl("https://eg-sycdn.kuwo.cn/366bf1454a69490a1290a59db26e53cb/5e394291/resource/n1/93/1/136616734.mp3");
         AudioPlayerManager.addAudio(audioBean);
         AudioPlayerManager.setPlayMode(AudioController.PlayMode.REPEAT);
     }

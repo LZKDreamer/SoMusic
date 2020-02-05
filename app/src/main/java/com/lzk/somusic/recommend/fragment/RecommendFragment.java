@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
+import com.lzk.lib_audio.audioplayer.model.AudioBean;
 import com.lzk.lib_common_ui.base.fragment.BaseFragment;
 import com.lzk.lib_common_ui.utils.CommonUtil;
 import com.lzk.somusic.R;

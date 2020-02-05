@@ -1,7 +1,10 @@
 package com.lzk.lib_image_loader;
 
+import android.app.Notification;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -9,9 +12,10 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.NotificationTarget;
+import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Author: LiaoZhongKai.
@@ -50,12 +54,40 @@ public class ImageLoadManager {
                 .into(imageView);
     }
 
+    /**
+     * 为Notification加载图片
+     * @param context
+     * @param url
+     * @param id
+     * @param rv
+     * @param notification
+     * @param NOTIFICATION_ID
+     */
+    public void loadImgForNotification(Context context,String url, int id, RemoteViews rv,
+                                       Notification notification, int NOTIFICATION_ID){
+        Target target = initNotificationTarget(context,id,rv,notification,NOTIFICATION_ID);
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .thumbnail(0.7f)
+                .fitCenter()
+                .apply(getOptions())
+                .into(target);
+    }
+
+    private NotificationTarget initNotificationTarget(Context context, int id, RemoteViews rv,
+                                                      Notification notification, int NOTIFICATION_ID) {
+        NotificationTarget notificationTarget =
+                new NotificationTarget(context, id, rv, notification, NOTIFICATION_ID);
+        return notificationTarget;
+    }
+
     private RequestOptions getOptions(){
         RequestOptions options = new RequestOptions();
         options.placeholder(R.drawable.bg_img_shape)
                 .error(R.drawable.bg_img_shape)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .centerCrop();
+                ;
         return options;
     }
 }

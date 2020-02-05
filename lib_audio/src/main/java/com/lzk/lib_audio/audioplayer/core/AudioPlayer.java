@@ -90,6 +90,9 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
      * @param audioBean
      */
     public void load(AudioBean audioBean){
+        if (audioBean == null){
+            return;
+        }
         try {
             mCustomMediaPlayer.reset();
             mCustomMediaPlayer.setDataSource(audioBean.getUrl());
@@ -126,10 +129,11 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
             if (mWifiLock != null && mWifiLock.isHeld()){
                 mWifiLock.release();
             }
+            //暂停时不释放焦点，否则在挂掉电话后系统不会回调AUDIOFOCUS_GAIN
             //释放焦点
-            if (mAudioFocusManager != null){
-                mAudioFocusManager.abandonAudioFocus();
-            }
+//            if (mAudioFocusManager != null){
+//                mAudioFocusManager.abandonAudioFocus();
+//            }
             //发送暂停事件
             EventBusHelper.getInstance().post(new AudioPauseEvent());
         }
@@ -141,9 +145,6 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
     public void resume(){
         if (getStatus() == CustomMediaPlayer.Status.PAUSED){
             start();
-            mWifiLock.acquire();
-        }else {//音频焦点被占用
-            showOccupiedToast();
         }
     }
 
@@ -228,7 +229,6 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
 
     @Override
     public void onBufferingUpdate(MediaPlayer mediaPlayer, int i) {
-
     }
 
     @Override
