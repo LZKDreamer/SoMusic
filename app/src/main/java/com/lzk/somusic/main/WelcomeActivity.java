@@ -41,25 +41,26 @@ public class WelcomeActivity extends BaseUIActivity implements BaseHandler.IHand
             Intent intent = new Intent(this,GuideActivity.class);
             startActivity(intent);
         }else {
+            //        AudioBean audioBean = new AudioBean();
+//        audioBean.setName("我和我的祖国");
+//        audioBean.setAuthor("中央乐团合唱团");
+//        audioBean.setPicUrl("http://img2.kuwo.cn/star/albumcover/300/79/42/1619637433.jpg");
+//        audioBean.setUrl("http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_40820402&response=res&type=convert_url&");
+//
+//        AudioBean audioBean1 = new AudioBean();
+//        audioBean1.setName("山楂树の恋");
+//        audioBean1.setAuthor("程jiajia");
+//        audioBean1.setPicUrl("http://img1.kuwo.cn/star/albumcover/300/81/43/1063260811.jpg");
+//        audioBean1.setUrl("hhttp://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_73433206&response=res&type=convert_url&");
+            ArrayList<AudioBean> audioBeans = new ArrayList<>();
+//        audioBeans.add(audioBean);
+//        audioBeans.add(audioBean1);
+            AudioPlayerManager.startMusicService(audioBeans);
+            AudioPlayerManager.setNotificationTargetActivity(MainActivity.class);
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-        AudioBean audioBean = new AudioBean();
-        audioBean.setName("我和我的祖国");
-        audioBean.setAuthor("中央乐团合唱团");
-        audioBean.setPicUrl("http://img2.kuwo.cn/star/albumcover/300/79/42/1619637433.jpg");
-        audioBean.setUrl("http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_40820402&response=res&type=convert_url&");
-
-        AudioBean audioBean1 = new AudioBean();
-        audioBean1.setName("山楂树の恋");
-        audioBean1.setAuthor("程jiajia");
-        audioBean1.setPicUrl("http://img1.kuwo.cn/star/albumcover/300/81/43/1063260811.jpg");
-        audioBean1.setUrl("hhttp://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_73433206&response=res&type=convert_url&");
-        ArrayList<AudioBean> audioBeans = new ArrayList<>();
-        audioBeans.add(audioBean);
-        audioBeans.add(audioBean1);
-        AudioPlayerManager.startMusicService(audioBeans);
-        AudioPlayerManager.setNotificationTargetActivity(MainActivity.class);
         finish();
     }
 }

@@ -20,7 +20,8 @@
             android:textSize="12sp"
             android:textColor="@color/music_name"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            android:text="@string/default_name"/>
         <TextView
             android:id="@+id/music_notification_author_tv"
             android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/music_author"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            android:text="@string/default_author"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

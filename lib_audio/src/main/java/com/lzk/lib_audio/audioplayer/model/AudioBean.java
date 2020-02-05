@@ -1,5 +1,7 @@
 package com.lzk.lib_audio.audioplayer.model;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 /**
@@ -68,5 +70,13 @@ public class AudioBean implements Serializable {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof AudioBean)){
+            return false;
+        }
+        return (this.url.equals(((AudioBean) obj).url));
     }
 }

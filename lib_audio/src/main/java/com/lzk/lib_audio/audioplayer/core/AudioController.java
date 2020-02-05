@@ -255,7 +255,7 @@ public class AudioController {
     public void addAudio(AudioBean newAudio){
         int index = queryAudio(newAudio);
         if (index <= -1){//未添加过
-            mQueue.add(newAudio);
+            mQueue.add(0,newAudio);
             play(0);
         }else {//要添加的歌曲已经添加
             AudioBean nowAudio = getAudio();

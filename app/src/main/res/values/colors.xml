@@ -6,7 +6,7 @@
 
     <color name="common_bg">#ffffff</color>
     <color name="common_text">#000000</color>
-    <color name="common_text_light">#ccc7c6</color>
+    <color name="common_text_light">#4c4c4c</color>
     <color name="nav_text_normal">#dfd9dc</color>
     <color name="nav_text_select">#000000</color>
 </resources>

@@ -173,12 +173,14 @@ public class GuideActivity extends BaseUIActivity {
 
     private void loadMusic(){
         AudioBean audioBean = new AudioBean();
-        audioBean.setUrl("https://eg-sycdn.kuwo.cn/366bf1454a69490a1290a59db26e53cb/5e394291/resource/n1/93/1/136616734.mp3");
+        audioBean.setUrl(Constants.GUIDE_MUSIC_URL);
         AudioPlayerManager.addAudio(audioBean);
         AudioPlayerManager.setPlayMode(AudioController.PlayMode.REPEAT);
     }
 
     private void startMainActivity(){
+        AudioPlayerManager.startMusicService(new ArrayList<>());
+        AudioPlayerManager.setNotificationTargetActivity(MainActivity.class);
         SPUtil.getInstance().putBoolean(Constants.IS_FIRST,false);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

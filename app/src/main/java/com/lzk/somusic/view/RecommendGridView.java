@@ -20,6 +20,8 @@ import com.lzk.somusic.recommend.model.RecommendData;
 
 import java.util.List;
 
+import retrofit2.http.POST;
+
 /**
  * Author: LiaoZhongKai.
  * Date: 2020/2/2
@@ -30,6 +32,7 @@ public class RecommendGridView extends RelativeLayout {
     private Context mContext;
     private RecommendData.DataBean mDataBean;
     private RecyclerView mRecyclerView;
+    private OnClickListener mOnClickListener;
 
     public RecommendGridView(Context context, RecommendData.DataBean dataBean) {
         this(context,null,dataBean);
@@ -46,7 +49,16 @@ public class RecommendGridView extends RelativeLayout {
         View view = LayoutInflater.from(mContext).inflate(R.layout.layout_recommend_gird_view,this);
         mRecyclerView = view.findViewById(R.id.recommend_grid_rv);
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext,3));
-        mRecyclerView.setAdapter(new GridAdapter(R.layout.layout_recommend_grid_item,mDataBean.getRecommend()));
+        GridAdapter adapter = new GridAdapter(R.layout.layout_recommend_grid_item,mDataBean.getRecommend()) ;
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (mOnClickListener != null){
+                    mOnClickListener.onItemClick(position, (RecommendData.DataBean.RecommendBean) adapter.getData().get(position));
+                }
+            }
+        });
     }
 
     class GridAdapter extends BaseQuickAdapter<RecommendData.DataBean.RecommendBean, BaseViewHolder>{
@@ -61,5 +73,13 @@ public class RecommendGridView extends RelativeLayout {
             ImageView imageView = helper.getView(R.id.recommend_item_iv);
             ImageLoadManager.getInstance().loadRoundedRectImg(imageView,item.getImg(), CommonUtil.dip2px(mContext,mContext.getResources().getDimension(R.dimen.img_rounded_corner)));
         }
+    }
+
+    public interface OnClickListener{
+        void onItemClick(int position,RecommendData.DataBean.RecommendBean item);
+    }
+
+    public void setOnItemClickListener(OnClickListener listener){
+        mOnClickListener = listener;
     }
 }
