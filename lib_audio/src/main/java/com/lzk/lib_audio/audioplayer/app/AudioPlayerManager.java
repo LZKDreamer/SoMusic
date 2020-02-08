@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.lzk.lib_audio.audioplayer.activity.MusicPlayerActivity;
 import com.lzk.lib_audio.audioplayer.core.AudioController;
 import com.lzk.lib_audio.audioplayer.core.AudioPlayer;
 import com.lzk.lib_audio.audioplayer.core.CustomMediaPlayer;
@@ -36,7 +37,14 @@ public final class AudioPlayerManager {
      * @param bean
      */
     public static void addAudio(AudioBean bean){
+        addAudio(null,bean);
+    }
+
+    public static void addAudio(Activity activity , AudioBean bean){
         AudioController.getInstance().addAudio(bean);
+        if (activity != null){
+            MusicPlayerActivity.start(activity);
+        }
     }
 
     /**

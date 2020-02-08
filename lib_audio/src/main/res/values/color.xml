@@ -2,4 +2,6 @@
 <resources>
     <color name="music_name">#000000</color>
     <color name="music_author">#2c2c2c</color>
+    <color name="music_time_text">#b5afb2</color>
+    <color name="music_common_bg">#ffffff</color>
 </resources>

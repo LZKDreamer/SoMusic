@@ -151,6 +151,7 @@ public class AudioController {
      * 停止播放
      */
     public void stop(){
+        mQueue.clear();
         mAudioPlayer.stop();
     }
 
@@ -159,6 +160,14 @@ public class AudioController {
      */
     public void resume(){
         mAudioPlayer.resume();
+    }
+
+    /**
+     * 从某位置开始播放
+     * @param duration
+     */
+    public void seekTo(int duration){
+        mAudioPlayer.seekTo(duration);
     }
 
     /**
@@ -260,8 +269,7 @@ public class AudioController {
         }else {//要添加的歌曲已经添加
             AudioBean nowAudio = getAudio();
             //不是正在播放的歌曲
-            if (!newAudio.getName().equals(nowAudio.getName()) &&
-                    !newAudio.getAuthor().equals(nowAudio.getAuthor())){
+            if (!newAudio.getUrl().equals(nowAudio.getUrl())){
                 play(index);
             }
         }

@@ -22,6 +22,7 @@ import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioLoadEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioPauseEvent;
+import com.lzk.lib_audio.audioplayer.event.AudioProgressEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioReleaseEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioStartEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioStopEvent;
@@ -40,6 +41,8 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,AudioFocusManager.AudioFocusListener{
 
     private static final String TAG = "AudioPlayer";
+    private static final int TIME_MSG = 100;
+    private static final int HANDLER_MUSIC_PROGRESS = 0x001;
 
     private Context mContext;
 
@@ -55,6 +58,14 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
+            switch (msg.what){
+                case HANDLER_MUSIC_PROGRESS:
+                    if (getStatus() == CustomMediaPlayer.Status.STARTED || getStatus() == CustomMediaPlayer.Status.PAUSED){
+                        EventBusHelper.getInstance().post(new AudioProgressEvent(getCurrentPosition(),getDuration()));
+                        sendEmptyMessageDelayed(HANDLER_MUSIC_PROGRESS,TIME_MSG);
+                    }
+                    break;
+            }
         }
     };
 
@@ -113,6 +124,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
             mWifiLock.acquire();
             //对外发送开始事件
             EventBusHelper.getInstance().post(new AudioStartEvent());
+            mHandler.sendEmptyMessageDelayed(HANDLER_MUSIC_PROGRESS,TIME_MSG);
         }else {//音频焦点被占用
             showOccupiedToast();
         }
@@ -149,6 +161,19 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
     }
 
     /**
+     * 从某位置开始播放
+     * @param duration
+     */
+    public void seekTo(int duration){
+        if (getStatus() == CustomMediaPlayer.Status.STARTED || getStatus() == CustomMediaPlayer.Status.PAUSED ||
+        getStatus() == CustomMediaPlayer.Status.COMPLETED){
+            if (mCustomMediaPlayer != null){
+                mCustomMediaPlayer.seekTo(duration);
+            }
+        }
+    }
+
+    /**
      * 停止播放
      * 将所有状态重置为初始状态
      */
@@ -167,6 +192,8 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
         }
         //发送停止事件
         EventBusHelper.getInstance().post(new AudioStopEvent());
+
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     /**

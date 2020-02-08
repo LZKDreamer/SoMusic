@@ -28,10 +28,6 @@ public class MeFragment extends BaseFragment {
         return fragment;
     }
 
-    private MeFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_me;

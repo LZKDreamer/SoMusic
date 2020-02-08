@@ -54,10 +54,6 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         return fragment;
     }
 
-    private RecommendFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_recommend;
@@ -109,7 +105,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
                 audioBean.setAuthor(bannerBean.getAuthor());
                 audioBean.setName(bannerBean.getName());
                 audioBean.setDuration(bannerBean.getDuration());
-                AudioPlayerManager.addAudio(audioBean);
+                AudioPlayerManager.addAudio(mActivity,audioBean);
             }
 
             @Override
@@ -133,7 +129,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
                 audioBean.setAuthor(item.getAuthor());
                 audioBean.setName(item.getName());
                 audioBean.setDuration(item.getDuration());
-                AudioPlayerManager.addAudio(audioBean);
+                AudioPlayerManager.addAudio(mActivity,audioBean);
             }
         });
         mAdapter.addHeaderView(gridView);
@@ -153,7 +149,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
                 audioBean.setAuthor(guessBean.getAuthor());
                 audioBean.setName(guessBean.getName());
                 audioBean.setDuration(guessBean.getDuration());
-                AudioPlayerManager.addAudio(audioBean);
+                AudioPlayerManager.addAudio(mActivity,audioBean);
             }
         });
     }

@@ -27,10 +27,6 @@ public class ExploreFragment extends BaseFragment {
         return fragment;
     }
 
-    private ExploreFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_explore;

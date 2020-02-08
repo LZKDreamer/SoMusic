@@ -39,6 +39,9 @@ public class NotificationEventReceiver extends BroadcastReceiver {
                 case EXTRA_PLAY:
                     AudioController.getInstance().playOrPause();
                     break;
+                case EXTRA_CLOSE:
+                    AudioController.getInstance().release();
+                    break;
             }
         }
     }

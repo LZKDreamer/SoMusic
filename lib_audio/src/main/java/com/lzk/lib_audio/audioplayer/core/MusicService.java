@@ -14,6 +14,7 @@ import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
 import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioLoadEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioPauseEvent;
+import com.lzk.lib_audio.audioplayer.event.AudioReleaseEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioStartEvent;
 import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
 import com.lzk.lib_audio.audioplayer.model.AudioBean;
@@ -52,13 +53,14 @@ public class MusicService extends Service implements MusicNotificationHelperList
     @Override
     public void onCreate() {
         super.onCreate();
-
+        EventBusHelper.getInstance().register(this);
         registerMusicReceiver();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBusHelper.getInstance().unregister(this);
         MusicNotificationHelper.getInstance().destroy();
         unregisterMusicReceiver();
     }
@@ -71,6 +73,12 @@ public class MusicService extends Service implements MusicNotificationHelperList
             MusicNotificationHelper.getInstance().init(this);
         }
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReleaseEvent(AudioReleaseEvent event){
+        stopForeground(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private void registerMusicReceiver(){

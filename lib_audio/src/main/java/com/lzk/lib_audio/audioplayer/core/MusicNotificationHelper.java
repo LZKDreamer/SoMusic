@@ -162,6 +162,9 @@ public class MusicNotificationHelper {
             ImageLoadManager.getInstance().loadImgForNotification(mContext,mAudioBean.getPicUrl(),R.id.music_notification_img_iv,
                     mBigView,mNotification,NOTIFICATION_ID);
             mNotificationManager.notify(NOTIFICATION_ID,mNotification);
+            ImageLoadManager.getInstance().loadImgForNotification(mContext,mAudioBean.getPicUrl(),R.id.music_notification_img_iv,
+                    mSmallView,mNotification,NOTIFICATION_ID);
+            mNotificationManager.notify(NOTIFICATION_ID,mNotification);
         }
     }
 
