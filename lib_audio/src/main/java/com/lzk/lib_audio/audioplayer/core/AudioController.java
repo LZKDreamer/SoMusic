@@ -1,5 +1,8 @@
 package com.lzk.lib_audio.audioplayer.core;
 
+import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
+import com.lzk.lib_audio.audioplayer.db.GreenDaoHelper;
+import com.lzk.lib_audio.audioplayer.event.AudioCollectMusicEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
 import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
@@ -289,5 +292,25 @@ public class AudioController {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAudioErrorEvent(AudioErrorEvent event) {
         next();
+    }
+
+    /**
+     * 收藏/取消收藏音乐
+     */
+    public void collectMusic(){
+        AudioBean audioBean = getAudio();
+        if (audioBean != null){
+            if (GreenDaoHelper.getInstance().queryFavouriteMusic(audioBean) == null){
+                //未收藏
+                GreenDaoHelper.getInstance().addFavouriteMusic(audioBean);
+                //对外发送收藏事件
+                EventBusHelper.getInstance().post(new AudioCollectMusicEvent(true));
+            }else {
+                //已收藏
+                GreenDaoHelper.getInstance().removeFavouriteMusic(audioBean);
+                //对外发送取消收藏事件
+                EventBusHelper.getInstance().post(new AudioCollectMusicEvent(false));
+            }
+        }
     }
 }

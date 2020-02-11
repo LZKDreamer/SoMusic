@@ -122,7 +122,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         RecommendGridView gridView = new RecommendGridView(mActivity,data.getData());
         gridView.setOnItemClickListener(new RecommendGridView.OnClickListener() {
             @Override
-            public void onItemClick(int position, RecommendData.DataBean.RecommendBean item) { ;
+            public void onItemClick(int position, RecommendData.DataBean.RecommendBean item) {
                 AudioBean audioBean = new AudioBean();
                 audioBean.setUrl(item.getUrl());
                 audioBean.setPicUrl(item.getImg());

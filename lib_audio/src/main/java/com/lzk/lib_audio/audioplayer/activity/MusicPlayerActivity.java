@@ -4,18 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.lzk.lib_audio.R;
 import com.lzk.lib_audio.audioplayer.core.AudioController;
+import com.lzk.lib_audio.audioplayer.db.GreenDaoHelper;
+import com.lzk.lib_audio.audioplayer.event.AudioCollectMusicEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioLoadEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioPauseEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioProgressEvent;
@@ -50,6 +55,7 @@ public class MusicPlayerActivity extends BaseUIActivity {
     private ImageView mPlayModeIv;
     private ImageView mFavouriteIv;
     private ImageView mShareIv;
+    private ObjectAnimator mAnimator;
 
     public static void start(Activity activity){
         Intent intent = new Intent(activity,MusicPlayerActivity.class);
@@ -95,7 +101,9 @@ public class MusicPlayerActivity extends BaseUIActivity {
         if (mAudioBean != null){
             mSongNameTv.setText(mAudioBean.getName());
             mSongAuthorTv.setText(mAudioBean.getAuthor());
+            changeFavouriteStatus(false);
         }
+
     }
 
     private void initData(){
@@ -136,7 +144,7 @@ public class MusicPlayerActivity extends BaseUIActivity {
         mFavouriteIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AudioController.getInstance().collectMusic();
             }
         });
         mShareIv.setOnClickListener(new View.OnClickListener() {
@@ -212,11 +220,17 @@ public class MusicPlayerActivity extends BaseUIActivity {
         showPlayOrPauseView();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCollectMusicEvent(AudioCollectMusicEvent event){
+        changeFavouriteStatus(true);
+    }
+
     private void showLoadView(AudioBean  bean){
         mAudioBean = bean;
         mSongAuthorTv.setText(mAudioBean.getAuthor());
         mSongNameTv.setText(mAudioBean.getName());
         mPlayIv.setImageResource(R.drawable.ic_play_big);
+        changeFavouriteStatus(false);
     }
 
     private void setPlayMode(){
@@ -235,6 +249,28 @@ public class MusicPlayerActivity extends BaseUIActivity {
                 mPlayModeIv.setImageResource(R.drawable.ic_loop);
                 break;
 
+        }
+    }
+
+    /**
+     * 改变收藏的状态
+     */
+    private void changeFavouriteStatus(boolean anim){
+        if (GreenDaoHelper.getInstance().queryFavouriteMusic(mAudioBean) == null){
+            mFavouriteIv.setImageResource(R.drawable.ic_favorite_nor);
+        }else {
+            mFavouriteIv.setImageResource(R.drawable.ic_favorite_select);
+        }
+        if (anim){
+            if (mAnimator != null) mAnimator.end();
+            PropertyValuesHolder animX =
+                    PropertyValuesHolder.ofFloat(View.SCALE_X.getName(), 1.0f, 1.2f, 1.0f);
+            PropertyValuesHolder animY =
+                    PropertyValuesHolder.ofFloat(View.SCALE_Y.getName(), 1.0f, 1.2f, 1.0f);
+            mAnimator = ObjectAnimator.ofPropertyValuesHolder(mFavouriteIv, animX, animY);
+            mAnimator.setInterpolator(new AccelerateInterpolator());
+            mAnimator.setDuration(300);
+            mAnimator.start();
         }
     }
 
