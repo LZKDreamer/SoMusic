@@ -19,6 +19,7 @@ public class AudioBean implements Serializable {
 
     private static final long serialVersionUID = -2770995586612698282L;
 
+
     private String id;
 
     /**
@@ -115,11 +116,4 @@ public class AudioBean implements Serializable {
         this.id = id;
     }
 
-    public String getAudioId() {
-        return this.id;
-    }
-
-    public void setAudioId(String audioId) {
-        this.id = audioId;
-    }
 }

@@ -1,6 +1,5 @@
 package com.lzk.lib_audio.audioplayer.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import com.lzk.lib_audio.R;
 import com.lzk.lib_audio.audioplayer.core.AudioController;
-import com.lzk.lib_audio.audioplayer.db.GreenDaoHelper;
+import com.lzk.lib_audio.audioplayer.db.AudioGreenDaoHelper;
 import com.lzk.lib_audio.audioplayer.event.AudioCollectMusicEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioLoadEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioPauseEvent;
@@ -29,14 +28,10 @@ import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
 import com.lzk.lib_audio.audioplayer.model.AudioBean;
 import com.lzk.lib_audio.audioplayer.view.JukeboxView;
 import com.lzk.lib_audio.utils.Util;
-import com.lzk.lib_common_ui.base.activity.BaseActivity;
 import com.lzk.lib_common_ui.base.activity.BaseUIActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
-
-import javax.xml.transform.sax.TemplatesHandler;
 
 public class MusicPlayerActivity extends BaseUIActivity {
 
@@ -256,7 +251,7 @@ public class MusicPlayerActivity extends BaseUIActivity {
      * 改变收藏的状态
      */
     private void changeFavouriteStatus(boolean anim){
-        if (GreenDaoHelper.getInstance().queryFavouriteMusic(mAudioBean) == null){
+        if (AudioGreenDaoHelper.getInstance().queryFavouriteMusic(mAudioBean) == null){
             mFavouriteIv.setImageResource(R.drawable.ic_favorite_nor);
         }else {
             mFavouriteIv.setImageResource(R.drawable.ic_favorite_select);

@@ -114,6 +114,7 @@ public class ImageLoadManager {
         options.placeholder(R.drawable.bg_img_shape)
                 .error(R.drawable.bg_img_shape)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .centerCrop()
                 ;
         return options;
     }

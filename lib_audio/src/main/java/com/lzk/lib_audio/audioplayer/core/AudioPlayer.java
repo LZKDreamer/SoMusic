@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 
 import com.lzk.lib_audio.R;
 import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
+import com.lzk.lib_audio.audioplayer.db.AudioGreenDaoHelper;
 import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioLoadEvent;
@@ -110,6 +111,8 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
             mCustomMediaPlayer.prepareAsync();
             //对外发送加载事件
             EventBusHelper.getInstance().post(new AudioLoadEvent(audioBean));
+            //添加到播放记录
+            AudioGreenDaoHelper.getInstance().addPlayBackRecord(audioBean);
         }catch (IOException e){
             //对外发送失败事件
             EventBusHelper.getInstance().post(new AudioErrorEvent());
@@ -190,6 +193,7 @@ public class AudioPlayer implements MediaPlayer.OnCompletionListener, MediaPlaye
         if (mAudioFocusManager != null){
             mAudioFocusManager.abandonAudioFocus();
         }
+
         //发送停止事件
         EventBusHelper.getInstance().post(new AudioStopEvent());
 

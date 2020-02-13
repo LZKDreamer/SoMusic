@@ -3,16 +3,15 @@ package com.lzk.lib_audio.audioplayer.app;
 import android.app.Activity;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import com.lzk.lib_audio.audioplayer.activity.MusicPlayerActivity;
 import com.lzk.lib_audio.audioplayer.core.AudioController;
-import com.lzk.lib_audio.audioplayer.core.AudioPlayer;
-import com.lzk.lib_audio.audioplayer.core.CustomMediaPlayer;
 import com.lzk.lib_audio.audioplayer.core.MusicService;
 import com.lzk.lib_audio.audioplayer.model.AudioBean;
+import com.lzk.lib_audio.audioplayer.model.FavouriteBean;
+import com.lzk.lib_audio.audioplayer.model.PlayBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: LiaoZhongKai.
@@ -92,11 +91,24 @@ public final class AudioPlayerManager {
     }
 
     /**
+     * 是否处于暂停状态
+     * @return
+     */
+    public static boolean isPause(){
+        return AudioController.getInstance().isPause();
+    }
+
+
+    /**
      * 获取当前播放的歌曲
      * @return
      */
     public static AudioBean getAudioBean(){
         return AudioController.getInstance().getAudio();
+    }
+
+    public static List<AudioBean> getQueue(){
+        return AudioController.getInstance().getQueue();
     }
 
     /**
@@ -120,5 +132,29 @@ public final class AudioPlayerManager {
      */
     public static Class getNotificationTargetActivity(){
         return mTargetActivity;
+    }
+
+    /**
+     * 获取收藏的音乐集合
+     * @return
+     */
+    public static List<FavouriteBean> getFavouriteAudioList(){
+        return AudioController.getInstance().getFavouriteAudioList();
+    }
+
+    /**
+     * 获取播放记录
+     * @return
+     */
+    public static List<PlayBean> getPlayback(){
+        return AudioController.getInstance().getPlaybackRecordList();
+    }
+
+    /**
+     * 移除播放记录
+     * @param audioBean
+     */
+    public static void removePlaybackRecord(AudioBean audioBean){
+        AudioController.getInstance().removePlaybackRecord(audioBean);
     }
 }

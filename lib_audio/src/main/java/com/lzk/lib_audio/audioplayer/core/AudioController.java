@@ -1,17 +1,21 @@
 package com.lzk.lib_audio.audioplayer.core;
 
-import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
-import com.lzk.lib_audio.audioplayer.db.GreenDaoHelper;
+import android.util.Log;
+
+import com.lzk.lib_audio.audioplayer.db.AudioGreenDaoHelper;
 import com.lzk.lib_audio.audioplayer.event.AudioCollectMusicEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioErrorEvent;
 import com.lzk.lib_audio.audioplayer.event.AudioEventCompletionEvent;
 import com.lzk.lib_audio.audioplayer.event.EventBusHelper;
 import com.lzk.lib_audio.audioplayer.model.AudioBean;
+import com.lzk.lib_audio.audioplayer.model.FavouriteBean;
+import com.lzk.lib_audio.audioplayer.model.PlayBean;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -73,7 +77,7 @@ public class AudioController {
      * @param queue
      */
     public void setQueue(ArrayList<AudioBean> queue){
-        this.setQueue(queue,0);
+        this.setQueue(queue,getQueueIndex());
     }
 
     public void setQueue(ArrayList<AudioBean> queue,int index){
@@ -300,17 +304,41 @@ public class AudioController {
     public void collectMusic(){
         AudioBean audioBean = getAudio();
         if (audioBean != null){
-            if (GreenDaoHelper.getInstance().queryFavouriteMusic(audioBean) == null){
+            if (AudioGreenDaoHelper.getInstance().queryFavouriteMusic(audioBean) == null){
                 //未收藏
-                GreenDaoHelper.getInstance().addFavouriteMusic(audioBean);
+                AudioGreenDaoHelper.getInstance().addFavouriteMusic(audioBean);
                 //对外发送收藏事件
                 EventBusHelper.getInstance().post(new AudioCollectMusicEvent(true));
             }else {
                 //已收藏
-                GreenDaoHelper.getInstance().removeFavouriteMusic(audioBean);
+                AudioGreenDaoHelper.getInstance().removeFavouriteMusic(audioBean);
                 //对外发送取消收藏事件
                 EventBusHelper.getInstance().post(new AudioCollectMusicEvent(false));
             }
         }
+    }
+
+    /**
+     * 获取收藏的音乐集合
+     * @return
+     */
+    public List<FavouriteBean> getFavouriteAudioList(){
+        return AudioGreenDaoHelper.getInstance().queryAllFavouriteMusic();
+    }
+
+    /**
+     * 获取播放记录
+     * @return
+     */
+    public List<PlayBean> getPlaybackRecordList(){
+        return AudioGreenDaoHelper.getInstance().getPlaybackRecord();
+    }
+
+    /**
+     * 删除播放记录
+     * @param audioBean
+     */
+    public void removePlaybackRecord(AudioBean audioBean){
+        AudioGreenDaoHelper.getInstance().removePlaybackRecord(audioBean);
     }
 }

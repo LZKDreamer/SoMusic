@@ -1,5 +1,7 @@
 package com.lzk.lib_audio.audioplayer.model;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -9,18 +11,21 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.lzk.lib_audio.audioplayer.db.DaoSession;
 import com.lzk.lib_audio.audioplayer.db.AudioBeanDao;
-import com.lzk.lib_audio.audioplayer.db.FavouriteBeanDao;
+import com.lzk.lib_audio.audioplayer.db.PlayBeanDao;
 
 /**
  * Author: LiaoZhongKai.
- * Date: 2020/2/8
- * Function:收藏实体类
+ * Date: 2020/2/12
+ * Function:播放记录
  */
 @Entity
-public class FavouriteBean {
+public class PlayBean {
 
     @Id(autoincrement = true)
     private Long id;
+
+    //播放的时间毫秒值
+    private long timeMill;
 
     private String audioId;
     @ToOne(joinProperty = "audioId")
@@ -31,21 +36,22 @@ public class FavouriteBean {
     private transient DaoSession daoSession;
 
     /** Used for active entity operations. */
-    @Generated(hash = 1051331019)
-    private transient FavouriteBeanDao myDao;
-    @Generated(hash = 1639475816)
-    public FavouriteBean(Long id, String audioId) {
+    @Generated(hash = 116448589)
+    private transient PlayBeanDao myDao;
+    @Generated(hash = 865457118)
+    public PlayBean(Long id, long timeMill, String audioId) {
         this.id = id;
+        this.timeMill = timeMill;
         this.audioId = audioId;
     }
-    @Generated(hash = 579040056)
-    public FavouriteBean() {
+    @Generated(hash = 1251142461)
+    public PlayBean() {
     }
-    public Long getId() {
-        return this.id;
+    public long getTimeMill() {
+        return this.timeMill;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setTimeMill(long timeMill) {
+        this.timeMill = timeMill;
     }
     public String getAudioId() {
         return this.audioId;
@@ -116,18 +122,25 @@ public class FavouriteBean {
         myDao.update(this);
     }
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1254847589)
+    @Generated(hash = 24530227)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getFavouriteBeanDao() : null;
+        myDao = daoSession != null ? daoSession.getPlayBeanDao() : null;
     }
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (!(obj instanceof FavouriteBean)){
+        if (!(obj instanceof PlayBean)){
             return false;
         }
-        return (this.id.equals(((FavouriteBean) obj).id));
+        return (this.id.equals(((PlayBean) obj).id));
     }
 
 }

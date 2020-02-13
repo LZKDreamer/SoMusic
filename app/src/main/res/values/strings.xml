@@ -8,6 +8,9 @@
     <string name="recommend">推荐</string>
     <string name="recommended_songs">推荐歌曲</string>
     <string name="guess_you_like">猜你喜欢</string>
+    <string name="favourite">收藏</string>
+    <string name="play_list">播放列表</string>
+    <string name="content_empty">暂无内容</string>
 
     <string name="error_message">请求失败,请稍后再试</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".me.fragment.MeFragment">
+    tools:context=".me.fragment.MeFragment"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.lzk.somusic.view.FavouriteListView
+        android:id="@+id/me_favourite_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/common_text"
+        android:text="@string/play_list"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        >
+        <include
+            android:id="@+id/me_playback_record_empty_view_ll"
+            layout="@layout/layout_empty_view"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/me_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+</LinearLayout>

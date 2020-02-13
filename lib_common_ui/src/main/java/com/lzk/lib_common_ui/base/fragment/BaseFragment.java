@@ -25,15 +25,15 @@ public abstract class BaseFragment extends Fragment {
     protected Unbinder mUnbinder;
 
     protected Activity mActivity;
+    //懒加载
     /**
-     * 视图是否已初始化
+     * 是否初始化过布局
      */
-    private boolean isViewCreated = false;
-
+    protected boolean isViewInitiated;
     /**
-     * 是否已加载过数据
+     * 是否加载过数据
      */
-    private boolean isLoadedData = false;
+    protected boolean isDataInitiated;
 
     @Override
     public void onAttach(Context context) {
@@ -45,7 +45,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(),container,false);
-        isViewCreated = true;
         return view;
     }
 
@@ -64,18 +63,17 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isViewCreated && !isLoadedData && isVisibleToUser){
-            loadData();
+        if (isVisibleToUser) {
+            lazyLoadData();
         }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (getUserVisibleHint()){
-            loadData();
-            isLoadedData = true;
-        }
+        isViewInitiated=true;
+        //加载数据
+        lazyLoadData();
     }
 
     /**
@@ -83,6 +81,16 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected abstract int getLayoutId();
+
+    /**
+     * 懒加载数据
+     */
+    private void lazyLoadData(){
+        if (getUserVisibleHint() && isViewInitiated && !isDataInitiated) {
+            loadData();
+            isDataInitiated = true;//不再重复加载
+        }
+    }
 
     /**
      * 加载数据

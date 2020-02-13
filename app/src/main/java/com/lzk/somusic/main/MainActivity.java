@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.sax.TemplatesHandler;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,7 +131,8 @@ public class MainActivity extends BaseUIActivity {
         private List<Fragment> mFragmentList;
 
         public MainPagerAdapter(FragmentManager fm,List<Fragment> fragmentList){
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+
             mFragmentList = fragmentList;
         }
 
@@ -139,6 +144,11 @@ public class MainActivity extends BaseUIActivity {
         @Override
         public int getCount() {
             return mFragmentList == null ?0:mFragmentList.size();
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
         }
     }
 }

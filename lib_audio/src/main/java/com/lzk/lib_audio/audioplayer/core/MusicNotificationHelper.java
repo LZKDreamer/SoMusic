@@ -153,10 +153,10 @@ public class MusicNotificationHelper {
     public void showLoadView(AudioBean bean){
         mAudioBean = bean;
         if (mBigView != null && mSmallView != null && mAudioBean != null ){
-            mBigView.setImageViewResource(R.id.music_notification_play_iv,R.drawable.ic_play);
+            mBigView.setImageViewResource(R.id.music_notification_play_iv,AudioController.getInstance().isPlaying() ? R.drawable.ic_pause : R.drawable.ic_play);
             mBigView.setTextViewText(R.id.music_notification_name_tv,mAudioBean.getName());
             mBigView.setTextViewText(R.id.music_notification_author_tv,mAudioBean.getAuthor());
-            mSmallView.setImageViewResource(R.id.music_notification_play_iv,R.drawable.ic_play);
+            mSmallView.setImageViewResource(R.id.music_notification_play_iv,AudioController.getInstance().isPlaying() ? R.drawable.ic_pause : R.drawable.ic_play);
             mSmallView.setTextViewText(R.id.music_notification_name_tv,mAudioBean.getName());
             mSmallView.setTextViewText(R.id.music_notification_author_tv, mAudioBean.getAuthor());
             ImageLoadManager.getInstance().loadImgForNotification(mContext,mAudioBean.getPicUrl(),R.id.music_notification_img_iv,

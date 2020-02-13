@@ -23,4 +23,12 @@ public class Util {
         }
         return min + ":" + second;
     }
+
+    /**
+     * 当前时间毫秒值
+     * @return
+     */
+    public static long timeMill(){
+        return System.currentTimeMillis();
+    }
 }

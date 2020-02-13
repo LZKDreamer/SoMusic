@@ -58,6 +58,7 @@ public class GuideActivity extends BaseUIActivity {
     private List<View> mViewList;
     private GuidePagerAdapter mPagerAdapter;
     private ObjectAnimator mAnimator;
+    private AudioBean audioBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class GuideActivity extends BaseUIActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AudioPlayerManager.stopAudio();
+        stopAudio();
         EventBusHelper.getInstance().unregister(this);
     }
 
@@ -172,13 +173,13 @@ public class GuideActivity extends BaseUIActivity {
     }
 
     private void loadMusic(){
-        AudioBean audioBean = new AudioBean();
+        audioBean = new AudioBean();
         audioBean.setUrl(Constants.GUIDE_MUSIC_URL);
         AudioPlayerManager.addAudio(audioBean);
-        AudioPlayerManager.setPlayMode(AudioController.PlayMode.REPEAT);
     }
 
     private void startMainActivity(){
+        stopAudio();
         AudioPlayerManager.startMusicService(new ArrayList<>());
         AudioPlayerManager.setNotificationTargetActivity(MainActivity.class);
         SPUtil.getInstance().putBoolean(Constants.IS_FIRST,false);
@@ -190,5 +191,11 @@ public class GuideActivity extends BaseUIActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStartEvent(AudioStartEvent startEvent){
         initAnimation();
+    }
+
+    private void stopAudio(){
+        AudioPlayerManager.stopAudio();
+        if (audioBean != null) AudioPlayerManager.removePlaybackRecord(audioBean);
+        audioBean = null;
     }
 }

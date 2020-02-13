@@ -6,6 +6,7 @@ import android.os.Message;
 
 import com.lzk.lib_audio.audioplayer.app.AudioPlayerManager;
 import com.lzk.lib_audio.audioplayer.model.AudioBean;
+import com.lzk.lib_audio.audioplayer.model.PlayBean;
 import com.lzk.lib_common_ui.base.BaseHandler;
 import com.lzk.lib_common_ui.base.activity.BaseUIActivity;
 import com.lzk.lib_common_ui.utils.SPUtil;
@@ -41,8 +42,7 @@ public class WelcomeActivity extends BaseUIActivity implements BaseHandler.IHand
             Intent intent = new Intent(this,GuideActivity.class);
             startActivity(intent);
         }else {
-            ArrayList<AudioBean> audioBeans = new ArrayList<>();
-            AudioPlayerManager.startMusicService(audioBeans);
+            AudioPlayerManager.startMusicService((ArrayList<AudioBean>) AudioPlayerManager.getQueue());
             AudioPlayerManager.setNotificationTargetActivity(MainActivity.class);
 
             Intent intent = new Intent(this, MainActivity.class);
