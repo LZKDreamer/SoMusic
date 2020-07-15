@@ -22,6 +22,7 @@ ext{
             brvah               : '2.9.30',
             green_dao           : '3.2.2',
             eventbus            : '3.1.1',
+            gson                : '2.8.6',
     ]
 
     depsLibs = [
@@ -39,5 +40,6 @@ ext{
             brvah                   : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${depsVersion.brvah}",
             green_dao               : "org.greenrobot:greendao:${depsVersion.green_dao}",
             eventbus                : "org.greenrobot:eventbus:${depsVersion.eventbus}",
+            gson                    : "com.google.code.gson:gson:${depsVersion.gson}",
     ]
 }
