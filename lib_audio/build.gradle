@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
@@ -42,3 +43,26 @@ dependencies {
     compileOnly project(':lib_common_ui')
     compileOnly project(':lib_image_loader')
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository(url: "http://localhost:8081/repository/maven-snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                //引用时使用如下格式： implementation 'groupId:artifactId:version'
+                //版本号，有更新时修改版本号，在上传
+                version "1.0.1-SNAPSHOT"
+                //模块名字（每个模块不一样）
+                artifactId "lib-audio"
+                //一般使用的是公司的网址
+                groupId "com.lzk"
+                //默认配置不用修改
+                packaging "aar"
+            }
+        }
+    }
+}
+
