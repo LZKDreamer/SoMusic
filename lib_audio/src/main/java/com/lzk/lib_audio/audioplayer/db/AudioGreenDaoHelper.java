@@ -125,6 +125,14 @@ public class AudioGreenDaoHelper {
     public List<PlayBean> getPlaybackRecord(){
         PlayBeanDao playBeanDao = mDaoSession.getPlayBeanDao();
         List<PlayBean> list = (List<PlayBean>) playBeanDao.queryBuilder().orderDesc(PlayBeanDao.Properties.TimeMill).build().list();
+        Log.d("shiZi","size："+list.size());
+        for (PlayBean playBean : list){
+            if (playBean.getAudioBean() != null ){
+                Log.d("shiZi","song:"+playBean.getAudioBean().getName());
+            }else {
+                Log.d("shiZi","null");
+            }
+        }
         return list;
     }
 

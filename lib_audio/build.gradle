@@ -24,7 +24,7 @@ android {
 
     greendao {
         //其它配置保持默认,有需要再研究
-        schemaVersion 9 //数据库版本号
+        schemaVersion 11 //数据库版本号
         daoPackage 'com.lzk.lib_audio.audioplayer.db' //dao,master类所在包
     }
 
